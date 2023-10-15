@@ -1,5 +1,9 @@
 <script>
 	import '../app.css';
+	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
-<slot />
+<Navbar />
+<div class="flex justify-center">
+	<slot />
+</div>
