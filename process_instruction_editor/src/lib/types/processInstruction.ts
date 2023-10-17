@@ -8,7 +8,13 @@ export type step = {
     id: string,
     name: string,
     instructions: string,
-    dataCollection: dataCollection[]
+    dataCollectionSet: dataCollectionSet
+}
+
+export type dataCollectionSet = {
+    id: string,
+    name: string,
+    dataCollections: dataCollection[]
 }
 
 export type dataCollection = {

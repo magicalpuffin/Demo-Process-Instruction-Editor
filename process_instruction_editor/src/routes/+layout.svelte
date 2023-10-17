@@ -5,5 +5,7 @@
 
 <Navbar />
 <div class="flex justify-center">
-	<slot />
+	<div class="container m-2 max-w-4xl">
+		<slot />
+	</div>
 </div>
