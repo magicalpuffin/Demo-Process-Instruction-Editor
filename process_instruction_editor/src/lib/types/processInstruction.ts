@@ -1,24 +1,26 @@
-export type instruction = {
-    id: string,
-    name: string,
-    steps: step[]
+interface idName {
+	id: string;
+	name: string;
 }
 
-export type step = {
-    id: string,
-    name: string,
-    instructions: string,
-    dataCollectionSet: dataCollectionSet
-}
+export type instruction = idName & {
+	steps: instructionStep[];
+};
 
-export type dataCollectionSet = {
-    id: string,
-    name: string,
-    dataCollections: dataCollection[]
-}
+export type instructionStep = {
+	sequence: number;
+	detail: instruction | stepDocument;
+};
 
-export type dataCollection = {
-    id: string,
-    name: string,
-    type: string,
-}
+export type stepDocument = idName & {
+	document: string;
+	dataCollection: dataCollect;
+};
+
+export type dataCollection = idName & {
+	dataCollections: dataCollect[];
+};
+
+export type dataCollect = idName & {
+	type: string;
+};
