@@ -1,3 +1,5 @@
+import type { JSONContent } from '@tiptap/core';
+
 interface idName {
 	id: string;
 	name: string;
@@ -13,7 +15,7 @@ export type instructionStep = {
 };
 
 export type stepDocument = idName & {
-	document: string;
+	document: JSONContent;
 	dataCollection: dataCollect;
 };
 
