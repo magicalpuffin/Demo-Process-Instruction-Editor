@@ -1,13 +1,15 @@
 <script lang="ts">
 	import type { JSONContent } from '@tiptap/core';
 	import type { Writable } from 'svelte/store';
-	import type { stepDocument } from '$lib/types/processInstruction';
+	import type { stepDocument, stepDocumentsType } from '$lib/types/processInstruction';
 
 	import TipTap from '$lib/components/stepDocument/TipTap.svelte';
 	import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 	import { writable } from 'svelte/store';
 
-	let documentContent: Writable<JSONContent> = writable(getLocalStorage()?.document);
+	let stepDocuments = getStepDocuments();
+
+	let documentContent: Writable<JSONContent> = writable();
 	let documentName: string;
 
 	function generateRandomId() {
@@ -25,20 +27,30 @@
 			dataCollection: null
 		};
 
+		console.log(newStepDocument);
+
 		return newStepDocument;
 	}
 
-	function saveStepDocument(stepDocument: stepDocument) {
-		let serializedData = JSON.stringify(stepDocument);
+	function saveStepDocument(newStepDocument: stepDocument, stepDocuments: stepDocumentsType) {
+		console.log(stepDocuments);
+		let newStepDocuments = stepDocuments.set(newStepDocument.id, newStepDocument);
+		let serializedData = JSON.stringify(Array.from(newStepDocuments));
+
 		console.log(serializedData);
-		localStorage.setItem('testStepDocument', serializedData);
+		localStorage.setItem('stepDocuments', serializedData);
 	}
 
-	function getLocalStorage(): stepDocument | undefined {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('testStepDocument') !== null) {
+	function getStepDocuments(): stepDocumentsType {
+		if (typeof localStorage !== 'undefined' && localStorage.getItem('stepDocuments') !== null) {
 			// item not present in local storage, use initial value
-			let saved: stepDocument = JSON.parse(String(localStorage.getItem('testStepDocument')));
+			let saved: stepDocumentsType = new Map(
+				JSON.parse(String(localStorage.getItem('stepDocuments')))
+			);
 			console.log(saved);
+			return saved;
+		} else {
+			let saved: stepDocumentsType = new Map();
 			return saved;
 		}
 	}
@@ -56,11 +68,11 @@
 		class="btn btn-accent"
 		on:click={() => {
 			let stepDocument = createStepDocument($documentContent);
-			saveStepDocument(stepDocument);
+			saveStepDocument(stepDocument, stepDocuments);
 		}}>Save</button
 	>
 </div>
-<button class="btn btn-primary" on:click={getLocalStorage}>Get Local Storage</button>
+<button class="btn btn-primary" on:click={getStepDocuments}>Get Local Storage</button>
 <button class="btn btn-secondary" on:click={getCurrentDocument}>Get current document</button>
 
 <input
