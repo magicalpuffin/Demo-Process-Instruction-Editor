@@ -4,7 +4,7 @@
 	</div>
 	<div class="navbar-center hidden lg:flex">
 		<ul class="menu menu-horizontal px-1">
-			<li><a href="create">Create</a></li>
+			<li><a href="/">Create</a></li>
 			<li><a href="/">Library</a></li>
 		</ul>
 	</div>

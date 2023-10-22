@@ -6,18 +6,12 @@
 	import TipTap from '$lib/components/stepDocument/TipTap.svelte';
 	import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 	import { writable } from 'svelte/store';
+	import { generateRandomId } from '$lib/utils';
 
 	let stepDocuments = getStepDocuments();
 
 	let documentContent: Writable<JSONContent> = writable();
 	let documentName: string;
-
-	function generateRandomId() {
-		// Generate a random number and convert it to a hexadecimal string
-		const randomId = Math.random().toString(36).substring(2);
-
-		return randomId;
-	}
 
 	function createStepDocument(documentContent: JSONContent): stepDocument {
 		let newStepDocument: stepDocument = {
@@ -27,7 +21,7 @@
 			dataCollection: null
 		};
 
-		console.log(newStepDocument);
+		// console.log(newStepDocument);
 
 		return newStepDocument;
 	}
@@ -37,7 +31,7 @@
 		let newStepDocuments = stepDocuments.set(newStepDocument.id, newStepDocument);
 		let serializedData = JSON.stringify(Array.from(newStepDocuments));
 
-		console.log(serializedData);
+		// console.log(serializedData);
 		localStorage.setItem('stepDocuments', serializedData);
 	}
 
@@ -47,7 +41,7 @@
 			let saved: stepDocumentsType = new Map(
 				JSON.parse(String(localStorage.getItem('stepDocuments')))
 			);
-			console.log(saved);
+			// console.log(saved);
 			return saved;
 		} else {
 			let saved: stepDocumentsType = new Map();
