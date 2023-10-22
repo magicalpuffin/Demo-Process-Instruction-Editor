@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
+	// Page store from: https://www.reddit.com/r/sveltejs/comments/qx95ge/
+
 	type Breadcrumb = {
 		text: string;
 		href: string;
 	};
 
 	function capitalizeFirstLetter(string: string) {
-		// https://stackoverflow.com/questions/1026069/
+		// Function from: https://stackoverflow.com/questions/1026069/
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
@@ -22,7 +24,7 @@
 	}
 
 	let Breadcrumbs: Breadcrumb[] = getBreadcrumbsPath($page.url.pathname);
-	console.log(Breadcrumbs);
+	// console.log(Breadcrumbs);
 </script>
 
 <div class="breadcrumbs text-sm">

@@ -16,7 +16,7 @@
 		editor = new Editor({
 			element: element,
 			extensions: [StarterKit, Placeholder.configure({ placeholder: 'Start writing...' })],
-			// content: '<p>Enter text here</p>',
+			content: $editorStore,
 			onTransaction: () => {
 				// force re-render so `editor.isActive` works as expected
 				editor = editor;

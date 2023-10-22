@@ -16,7 +16,7 @@ export type instructionStep = {
 
 export type stepDocument = idName & {
 	document: JSONContent;
-	dataCollection: dataCollect;
+	dataCollection: dataCollect | null;
 };
 
 export type dataCollection = idName & {
