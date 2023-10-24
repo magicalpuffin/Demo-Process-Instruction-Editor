@@ -10,19 +10,20 @@
 
 	let element: HTMLElement;
 	let editor: Editor;
-	export let editorStore: Writable<JSONContent>;
+	export let contentStore: Writable<JSONContent>;
 
 	onMount(() => {
 		editor = new Editor({
 			element: element,
 			extensions: [StarterKit, Placeholder.configure({ placeholder: 'Start writing...' })],
-			content: $editorStore,
+			content: $contentStore,
 			onTransaction: () => {
 				// force re-render so `editor.isActive` works as expected
 				editor = editor;
 			},
 			onUpdate: () => {
-				editorStore.set(editor.getJSON());
+				// Updating keep contentStore in sync
+				contentStore.set(editor.getJSON());
 			},
 			editorProps: {
 				attributes: {

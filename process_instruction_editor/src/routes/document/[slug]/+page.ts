@@ -8,6 +8,7 @@ export const ssr = false;
 export const load: PageLoad = ({ params }) => {
 	let stepDocument: stepDocument | undefined;
 
+	// Selecting stepDocument by Id from global store
 	stepDocuments.subscribe((value) => {
 		stepDocument = value.get(params.slug);
 	});

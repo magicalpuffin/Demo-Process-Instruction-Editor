@@ -1,6 +1,6 @@
 import type { JSONContent } from '@tiptap/core';
 
-export type stepDocumentsType = Map<string, stepDocument>;
+export type stepDocumentsIndexed = Map<string, stepDocument>;
 
 interface idName {
 	id: string;

@@ -1,4 +1,4 @@
-import type { stepDocument, stepDocumentsType } from '$lib/types/processInstruction';
+import type { stepDocument, stepDocumentsIndexed } from '$lib/types/processInstruction';
 
 const DOCUMENTS_KEY = 'stepDocuments';
 
@@ -9,16 +9,16 @@ export function generateRandomId() {
 	return randomId;
 }
 
-export function getStepDocuments(): stepDocumentsType {
+export function getStepDocuments(): stepDocumentsIndexed {
 	if (typeof localStorage !== 'undefined' && localStorage.getItem(DOCUMENTS_KEY) !== null) {
 		// item not present in local storage, use initial value
-		const saved: stepDocumentsType = new Map(
+		const saved: stepDocumentsIndexed = new Map(
 			JSON.parse(String(localStorage.getItem(DOCUMENTS_KEY)))
 		);
 		// console.log(saved);
 		return saved;
 	} else {
-		const saved: stepDocumentsType = new Map();
+		const saved: stepDocumentsIndexed = new Map();
 		return saved;
 	}
 }
@@ -36,7 +36,10 @@ export function createStepDocument(): stepDocument {
 	return newStepDocument;
 }
 
-export function saveStepDocument(newStepDocument: stepDocument, stepDocuments: stepDocumentsType) {
+export function saveStepDocument(
+	newStepDocument: stepDocument,
+	stepDocuments: stepDocumentsIndexed
+) {
 	// console.log(stepDocuments);
 	const newStepDocuments = stepDocuments.set(newStepDocument.id, newStepDocument);
 	const serializedData = JSON.stringify(Array.from(newStepDocuments));

@@ -5,20 +5,14 @@
 	import { stepDocuments } from '$lib/components/store';
 	import DocumentEditor from '$lib/components/stepDocument/DocumentEditor.svelte';
 	import { saveStepDocument } from '$lib/utils';
+	import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 
 	export let data: PageData;
 
 	let stepDocument = data.stepDocument;
-
-	// function handleDocumentSave(documentContent: JSONContent) {
-	// 	console.log(documentContent);
-	// 	stepDocument.document = documentContent;
-	// 	saveStepDocument(stepDocument, $stepDocuments);
-	// }
-
-	// console.log(currentDocument);
 </script>
 
+<Breadcrumbs />
 <DocumentEditor
 	editorDocument={stepDocument}
 	on:documentSave={(e) => {
